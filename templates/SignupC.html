@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% load bootstrap3 %}
+
+{% block headblock %}
+
+ 
+{% endblock %}
+
+{% block content %}
+<div class="container jumbotron">
+    <h2>Please Enter the your Registered Email to connect with you !</h2>
+    <h3>please Enter your Registered Email to contact with you we will dispose your waste ..</h3>
+    <form method="POST" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" value="Submit Details" class="btn btn-default">
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "test.html" %}
+{% load static %} 
+{% load bootstrap3 %}
+
+{% block headblock %}
+
+ 
+{% endblock %}
+
+{% block content %}
+<head>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<div  class="bg-nav" >
+<div class="container"  >
+    <h1>LOGIN</h1>
+    <form method="POST" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+
+        <script>
+        function clickAlert() {
+          alert("You are now logged in!");
+        }
+      </script>
+<input type="submit" onclick="clickAlert()" value="Login" class="btn btn-default button button-block">
+        <!-- <input type="submit" value="Login" class="btn btn-default button button-block"> -->
+    </form>
+</div>
+</div>
+{% endblock %}
