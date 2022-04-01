@@ -15,7 +15,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 
 class HomePage(TemplateView):
-    template_name = "index.html" 
+    template_name = "start.html" 
 
 class SignUp(CreateView):
     form_class = forms.UserCreateForm
