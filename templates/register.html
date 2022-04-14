@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Vyarth{% endblock title %}
+
+{% load socialaccount %}
+ 
+{% block content %}
+
+
+<main role="main" class="container col-12 col-sm-8 col-md-6 col-lg-4 offset-sm-2 offset-md-3 offset-lg-4">
+    <br>
+    <h1  class="text-center">Sign Up</h1>
+    <br>   
+    <div class="or-seperator"><i>or</i></div>
+    <form method="post" >
+      {% csrf_token %}
+      {{form|crispy}}
+      <button class="btn btn-success btn-block" type="submit">Sign Up</button>
+    </form>
+    <br>
+     
+<p > Don't have an account? Please <a  href="{% url 'login' %}">log in</a> first.</p>
+  </main>
+
+{% endblock %}

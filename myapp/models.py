@@ -22,8 +22,7 @@ class SubmitWaste(models.Model):
          ('organic','Organic')
         ]
     contact=models.IntegerField(null=True)
-    number=models.IntegerField(null=True)
-
+    fullname=models.CharField(max_length=25,null=True)
     COMMUNITY_CHOICES= [
             ('household', 'Household'),
             ('industry', 'Industry'),

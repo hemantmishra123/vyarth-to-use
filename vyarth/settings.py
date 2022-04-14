@@ -42,6 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'myapp',
     'bootstrap3',
+    'crispy_forms',
+    # alluath apps
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
 ]
 SITE_ID = 1
 
@@ -128,7 +135,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 #django_heroku.settings(locals())
-
+#crispy forms settings
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 #Email settings
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -140,4 +148,24 @@ EMAIL_HOST_PASSWORD=""
 
 #EMAIL_USE_SSL
 
+LOGIN_REDIRECT_URL = 'index'
+# LOGOUT_REDIRECT_URL = 'index'
+
+SOCIALACCOUNT_QUERY_EMAIL = True
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'offline',
+        }
+    }
+}
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
 

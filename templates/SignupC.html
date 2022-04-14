@@ -13,7 +13,7 @@
     <h3>please Enter your Registered Email to contact with you we will dispose your waste ..</h3>
     <form method="POST" class="form">
         {% csrf_token %}
-        {% bootstrap_form form %}
+        {{form|crispy}}        
         <input type="submit" value="Submit Details" class="btn btn-default">
     </form>
 </div>

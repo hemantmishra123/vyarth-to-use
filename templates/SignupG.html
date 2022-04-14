@@ -1,24 +1,110 @@
-{% extends "base.html" %}
-{% load bootstrap3 %}
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <title>Gatherly Social Network | Register</title>
 
-{% block headblock %}
+    <link rel="stylesheet" href="{% static 'css/main.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/color.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
 
-
-{% endblock %}
-
-{% block content %}
-<div class="container jumbotron">
-    <h2>Please fill the following information to dispose off your waste!</h2>
-    <h3>We realise that, generating waste is not in your hands, but appropriately disposing it, is! Kudos on your efforts.</h3>
-    <form method="POST" class="form">
-
-        {% csrf_token %}
-        {% bootstrap_form form %}
-
-
-        <input type="submit" value="Submit Details" class="btn btn-default">
-    </form>
+</head>
+<body>
+<!--<div class="se-pre-con"></div>-->
+<div class="theme-layout">
+    <div class="container-fluid pdng0">
+        <div class="row merged">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="land-featurearea">
+                    <div class="land-meta">
+                        <h1>Vyarth</h1>
+                        <p>
+                            Vyarth is free to use for as long as you want with two active projects.
+                        </p>
+                        <div class="friend-logo">
+                            <span><img src="images/wink.png" alt=""></span>
+                        </div>
+                        <a href="#" title="" class="folow-me">Follow Us on</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="login-reg-bg show">
+                    <div class="log-reg-area reg">
+                        <h2 class="log-title">Enter Your Waste Details and connect with us </h2>
+                        <p>
+                            Don’t use Gatherly Yet? <a href="#" title="">Take the tour</a> or <a href="#" title="">Join now</a>
+                        </p>
+                        <form method="post" action="">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="text" required="required" name="email"/>
+                                <label class="control-label" for="input">Email</label><i class="mtrl-select"></i>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" required="required" name="fullname"/>
+                                <label class="control-label" for="input">Full Name</label><i class="mtrl-select"></i>
+                            </div>
+							<div class="form-group">
+                                <input type="text" required="required" name="address"/>
+                                <label class="control-label" for="input">address</label><i class="mtrl-select"></i>
+                            </div>
+							
+                            <div class="form-group">
+                                <input type="number" required="required" name="contact"/>
+                                <label class="control-label" for="input">contact-Number</label><i class="mtrl-select"></i>
+                            </div>
+                           
+							<div class="form-group">
+                                <input type="text" required="required" name="Typeofwaste"/>
+                                <label class="control-label" for="input">Tyoe-of-Waste</label><i class="mtrl-select"></i>
+                            </div>
+							<div class="form-group">
+                                <input type="text" required="required" name="communityname"/>
+                                <label class="control-label" for="input">community-Name</label><i class="mtrl-select"></i>
+                            </div>
+							<div class="form-group">
+                                <input type="text" required="required" name="quantity"/>
+                                <label class="control-label" for="input">Quantity-of-Waste</label><i class="mtrl-select"></i>
+                            </div>
+							
+                            <div class="form-radio">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="gender" checked="checked"/><i class="check-box"></i>Male
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="gender"/><i class="check-box"></i>Female
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" checked="checked"/><i class="check-box"></i>Accept Terms & Conditions ?
+                                </label>
+                            </div>
+                          
+                            <div class="submit-btns">
+                                <button class="mtr-btn signup" type="submit"><span>Register</span></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<h3>As an added incentive on your nobel approach to make India a cleaner nation, we are initiating a Paytm Cashback in your wallet.</h3>
-<h5>*To be added soon!! Till then continue the good work!</h5>
-{% endblock %}
+
+<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="js/main.min.js"></script>
+<script src="js/script.js"></script>
+
+</body>
+</html>

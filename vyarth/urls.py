@@ -21,13 +21,14 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r"^$", views.HomePage.as_view(), name="home"),
-    url(r"^login/$", auth_views.LoginView.as_view(template_name="login.html"),name='login'),
+    url(r"^main/$",views.Mainview.as_view(), name="main"),
+    url(r"^login/$",  views.login_request, name='login'),
     url(r"^logout/$", auth_views.LogoutView.as_view(), name="logout"),
-    url(r"^signup/$", views.SignUp.as_view(), name="signup"),
-    url(r"^gview/$", views.GenView.as_view(), name="gview"),
+    url(r"^signup/$",  views.signup_request, name="signup"),
+    url(r"^gview/$", views.GenView, name="gview"),
     url(r"^cview/$", views.ColView.as_view(), name="cview"),
     url(r'^result/$',views.Result.as_view(),name='result'),
     url(r"^new_view/$", views.new_view, name="new_view"),
     url(r"^send_data/$", views.send_data, name="send_data"),
-
+    url(r"^register/$", views.signup_request, name='signup'),
 ]

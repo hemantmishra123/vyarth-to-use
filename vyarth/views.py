@@ -1,6 +1,6 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
-from django.contrib.auth import login, logout
+from django.shortcuts import render,redirect
+from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy,reverse
 from django.views.generic import CreateView,TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -15,31 +15,85 @@ from django.core.mail import send_mail
 from django.conf import settings
 
 class HomePage(TemplateView):
-    template_name = "start.html" 
+    template_name = "index.html" 
+
+class Mainview(TemplateView):
+    template_name = "index2.html"
 
 class SignUp(CreateView):
     form_class = forms.UserCreateForm
     success_url = reverse_lazy("login")
     template_name = "signup.html"
 
-class GenView(CreateView):
-    model = SubmitWaste
-    form_class= forms.SubmitWasteForm
-    success_url = reverse_lazy("home")
-    template_name = "SignupG.html"
+#class GenView(CreateView):
+ #   model = SubmitWaste
+  #  form_class= forms.SubmitWasteForm
+   # success_url = reverse_lazy("home")
+    #template_name = "SignupG.html"
     #success_url
     #template_name='thankyou.html'
-def send_data(request):
-    form=forms.SubmitWasteForm()
+def GenView(request):
     if request.method=='POST':
         #it is the rendering objects for data 
-        form=forms.SubmitWasteForm(request.POST)
-        if form.is_valid():
-            email=form.cleaned_data['email']
-            print("hello wolrld")
-        return render(request,'')
-    return render(request,'SignupG.html',{'form':form})
+        email=request.POST['email']
+        fullname=request.POST['fullname']
+        address=request.POST['address']
+        contact=request.POST['contact']
+        typeofwaste=request.POST['Typeofwaste']
+        communityname=request.POST['communityname']
+        quantity=request.POST['quantity']
+        user=SubmitWaste(contact=contact,fullname=fullname,address=address,email=email,typeofwaste=typeofwaste,quantityofwaste=quantity,communityName=communityname)
+        user.save()
+        return redirect('main')
+    return render(request,'SignupG.html')
+def login_request(request):
+    title = "Login"
+    form = forms.UserLoginForm(request.POST or None)
+    context = {
+        'form': form,
+        'title': title,
+    }
+    print(context)
+    if form.is_valid():
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password')
+        user = authenticate(request, username=username, password=password)
 
+        login(request, user)
+        # messages.info(request, f"You are now logged in  as {user}")
+        return redirect('main')
+    else:
+        print(form.errors)
+        # messages.error(request, 'Username or Password is Incorrect! ')
+    return render(request, 'active.html', context=context)
+#posting data with objects
+def submit_waste(request):
+    title = "Submit_Waste"
+    if request.method == "POST":
+        form = forms.SubmitWasteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('main')
+    else:
+        form = forms.SubmitWasteForm()
+
+    context = {'form': form, 'title': title}
+    return render(request, 'SignupG.html', context=context)
+
+
+
+def signup_request(request):
+    title = "Create Account"
+    if request.method == "POST":
+        form = forms.RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = forms.RegistrationForm()
+
+    context = {'form': form, 'title': title}
+    return render(request, 'register.html', context=context)
 
 
 class ColView(CreateView):

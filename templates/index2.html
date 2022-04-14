@@ -13,11 +13,11 @@
 {% endblock %}
 
 {% block fullscreen %}
-
+{% block content %}
 <div class="index-banner" style="margin-top:0px;">
   <div class="index-banner-bg"><img src="https://thumbs.mic.com/NjFlNDEwZjBhZCMvVUNXQVp4QmlmbTdhazdManZoV1JHWjJYanc0PS8weDA6OTAweDU4MC9maXQtaW4vNzYweDAvZmlsdGVyczpxdWFsaXR5KDcwKTpub191cHNjYWxlKCk6Zm9ybWF0KGpwZWcpL2h0dHA6Ly9zMy5hbWF6b25hd3MuY29tL3BvbGljeW1pYy1pbWFnZXMvZnA0b3BxY3YxdXRmODRzcWpmd3J3MW41d3dsa242cWp5YWdkYXl4dmZrbTEwbzZ6ZXYzZ21mbmZmcWV0amJwai5qcGc.jpg" alt="banner" style="opacity:0.65;"></div>
   <div class="index-banner-text">
-      <h1 align="center" style="color:#374760;font-size:180px;" class="head_mansi">VYARTH</h1>
+      <h1 align="center" style="color:#374760;font-size:65px;" class="head_mansi">VYARTH</h1>
 
     <div class="text-logo"></div>
     <p class="text-info">
@@ -25,9 +25,6 @@
       <span class="under_tag" style="color:#374760;font-size:60px;padding-left:60px;">Bekar.. Sweekar..
 </span><i class="line line-right"></i>
     </p>
-    {% if user.is_authenticated %}
-
-
   <a href="{% url 'gview' %}"><button type="button" class="btn btn-primary btn-md">Dispose Waste</button></a>
 
 
@@ -43,7 +40,7 @@
     src="https://console.dialogflow.com/api-client/demo/embedded/9859ceea-9fb8-4a16-a4e8-891b971daa29">
     hello</iframe>
 
-    {% endif %}
+    
   </div>
 </div>
 
@@ -283,4 +280,5 @@ font-family: 'Times New Roman', cursive;
 
 </style>
 
+{% endblock %}
 {% endblock %}
