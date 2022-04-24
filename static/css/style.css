@@ -24,11 +24,14 @@
     margin: 0px 20px;
 }
 
+
 #header .title {
     color: white;
     font-size: 20px;
 }
-
+#textlogo {
+	
+	}
 .main-section {
     padding: 3vh 0;
     text-align: center;
@@ -79,7 +82,57 @@
 	font-size: 20px;
     padding: 10px;
 }
-    
+
+.form-group {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    display: inline-block;
+    width: 100%;
+}
+.form-radio > .radio {
+    display: inline-block;
+    margin-bottom: 0;
+    width: 20%;
+}
+
+.form-radio {
+    margin: 0;
+}
+
+.form-search {
+    position: absolute;
+    right: -15px;
+    top: 42px;
+    width: 300px;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.searched.active .form-search {
+    opacity: 1;
+    visibility: visible;
+}
+
+.form-search input {
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    color: #999999;
+    font-size: 15px;
+    padding: 9px 18px;
+    width: 100%;
+}
+
+.form-search button {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: medium none;
+    color: #999;
+    position: absolute;
+    right: 5px;
+    top: 9px;
+}
+
+
+.
     audio,
     canvas,
     progress,

@@ -48,3 +48,11 @@ class CollectWaste(models.Model):
     email = models.EmailField( blank=False, max_length=255, unique=True, null=True,)
     address=models.TextField(max_length=1024, blank=True)
     
+class Search(models.Model):
+    address = models.CharField(max_length=200, null=True)
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.address
+
+

@@ -1,17 +1,20 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render,redirect
+from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy,reverse
 from django.views.generic import CreateView,TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from myapp.models import SubmitWaste,CollectWaste
+from myapp.models import SubmitWaste,CollectWaste, Search
 from . import forms
 from geopy.geocoders import Nominatim
 from geopy import distance
 from operator import itemgetter
 from tabulate import tabulate
 from django.core.mail import send_mail
-
+from .forms import SearchForm
+import folium
+import geocoder
 from django.conf import settings
 
 class HomePage(TemplateView):
@@ -46,6 +49,39 @@ def GenView(request):
         user.save()
         return redirect('main')
     return render(request,'SignupG.html')
+    
+def signu_request(request):
+    
+    if request.method == 'POST':
+        form = forms.SearchForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('map')
+    else:
+        
+        form = forms.SearchForm()
+    address = Search.objects.all().last()
+    location = geocoder.osm(address)
+    lat = location.lat
+    lng = location.lng
+    country = location.country
+    if lat == None or lng == None:
+        address.delete()
+        return HttpResponse('You address input is invalid')
+
+    # Create Map Object
+    m = folium.Map(location=[19, -12], zoom_start=2)
+
+    folium.Marker([lat, lng], tooltip='Click for more',
+                  popup=country).add_to(m)
+    # Get HTML Representation of Map Object
+    m = m._repr_html_()
+    context = {
+        'm': m,
+        'form': form,
+    }
+    return render(request, 'map.html', context)
+    
 def login_request(request):
     title = "Login"
     form = forms.UserLoginForm(request.POST or None)

@@ -31,4 +31,6 @@ urlpatterns = [
     url(r"^new_view/$", views.new_view, name="new_view"),
     url(r"^send_data/$", views.send_data, name="send_data"),
     url(r"^register/$", views.signup_request, name='signup'),
+    url(r"^map/$", views.signu_request, name='map'),
+
 ]

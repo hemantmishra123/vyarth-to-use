@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from myapp.models import SubmitWaste,CollectWaste
+from myapp.models import SubmitWaste,CollectWaste, Search
 import django.contrib.sites
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
@@ -64,4 +64,11 @@ class RegistrationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+class SearchForm(forms.ModelForm):
+    address = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Enter Your Location'}))
+
+    class Meta:
+        model = Search
+        fields = ['address', ]
 
