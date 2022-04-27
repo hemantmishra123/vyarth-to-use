@@ -131,7 +131,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT  = [os.path.join(BASE_DIR, 'staticfiles')]
 
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
@@ -139,9 +139,8 @@ LOGOUT_REDIRECT_URL = "home"
 #crispy forms settings
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 #Email settings
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static'),
-)
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST="smtp.gmail.com"
 EMAIL_PORT=587
