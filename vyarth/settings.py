@@ -27,7 +27,7 @@ SECRET_KEY = '(9ha3+&yn!2vg7-=@9g1ru$z(hu85r6*4q7n*72#$)l!6i6#7q'
 DEBUG = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['bekar-to-seekar.herokuapp.com']
 
 
 # Application definition
