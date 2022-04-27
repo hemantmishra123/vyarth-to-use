@@ -21,7 +21,7 @@ class HomePage(TemplateView):
     template_name = "index.html" 
 
 class Mainview(TemplateView):
-    template_name = "index2.html"
+    template_name = "works.html"
 
 class SignUp(CreateView):
     form_class = forms.UserCreateForm
@@ -39,6 +39,7 @@ def GenView(request):
     if request.method=='POST':
         #it is the rendering objects for data 
         email=request.POST['email']
+        dataset=SubmitWaste.objects.get(email=email)
         fullname=request.POST['fullname']
         address=request.POST['address']
         contact=request.POST['contact']
@@ -46,8 +47,14 @@ def GenView(request):
         communityname=request.POST['communityname']
         quantity=request.POST['quantity']
         user=SubmitWaste(contact=contact,fullname=fullname,address=address,email=email,typeofwaste=typeofwaste,quantityofwaste=quantity,communityName=communityname)
-        user.save()
-        return redirect('main')
+        if(email==dataset.email):
+            message="your email id is already registered with us"
+            return render(request,'thankyou.html',{'message':message})
+            
+        else:
+            user.save()
+            return redirect('main')
+        
     return render(request,'SignupG.html')
     
 def signu_request(request):

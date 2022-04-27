@@ -77,7 +77,7 @@ dfn {
 }
 
 h1 {
-    font-size: 2em;
+    font-size: 1em;
     margin: .67em 0
 }
 
@@ -133,6 +133,24 @@ pre,
 samp {
     font-family: monospace, monospace;
     font-size: 1em
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    color: inherit;
+    font: inherit;
+    margin: 0
+}
+
+button {
+    overflow: visible
+}
+
+button,
+select {
     text-transform: none
 }
 
@@ -5932,21 +5950,3 @@ textarea {
 
 
 /*# sourceMappingURL=main.70a66962.map*/
-button,
-select {
-}
-
-button,
-input,
-optgroup,
-}
-select,
-textarea {
-    color: inherit;
-    font: inherit;
-    margin: 0
-}
-
-button {
-    overflow: visible
-
