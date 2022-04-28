@@ -20,7 +20,7 @@ class SubmitWasteForm(forms.ModelForm):
     class Meta:
         
         model= SubmitWaste
-        fields = ['contact','communityName','typeofwaste','quantityofwaste','email','address']
+        fields = ['contact','communityName','typeofwaste','quantityofwaste','email','address','zipcode']
 
 class CollectWasteForm(forms.ModelForm):
 

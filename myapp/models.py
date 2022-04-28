@@ -33,8 +33,9 @@ class SubmitWaste(models.Model):
     typeofwaste= models.CharField(max_length=1024,choices=WASTE_CHOICES,default='organic')
     #typeofwaste=models.CharField(max_length=1024)
     address=models.TextField(max_length=1024, blank=True)
-    email = models.EmailField( blank=False, max_length=255, unique=True, null=True,)
-    quantityofwaste=models.IntegerField()
+    email = models.EmailField( blank=False, max_length=255, null=True,)
+    zipcode=models.IntegerField( null=True)
+    quantityofwaste=models.TextField(max_length=1024, blank=True, null=True)
 
 class CollectWaste(models.Model):
     WASTE_CHOICES= [

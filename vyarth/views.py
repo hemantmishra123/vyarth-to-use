@@ -37,23 +37,20 @@ class SignUp(CreateView):
     #template_name='thankyou.html'
 def GenView(request):
     if request.method=='POST':
+        #it is the orm Mapper For Creating a Database Table for and row for the user data .
         #it is the rendering objects for data 
         email=request.POST['email']
-        dataset=SubmitWaste.objects.get(email=email)
         fullname=request.POST['fullname']
         address=request.POST['address']
+        zipcode=request.POST['zip-code']
         contact=request.POST['contact']
         typeofwaste=request.POST['Typeofwaste']
         communityname=request.POST['communityname']
         quantity=request.POST['quantity']
-        user=SubmitWaste(contact=contact,fullname=fullname,address=address,email=email,typeofwaste=typeofwaste,quantityofwaste=quantity,communityName=communityname)
-        if(email==dataset.email):
-            message="your email id is already registered with us"
-            return render(request,'thankyou.html',{'message':message})
-            
-        else:
-            user.save()
-            return redirect('main')
+        user=SubmitWaste(contact=contact,fullname=fullname,address=address,zipcode=zipcode,email=email,typeofwaste=typeofwaste,quantityofwaste=quantity,communityName=communityname)
+        user.save()
+        return redirect('main')
+
         
     return render(request,'SignupG.html')
     
