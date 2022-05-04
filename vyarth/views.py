@@ -17,6 +17,7 @@ import folium
 import geocoder
 from django.conf import settings
 
+
 class HomePage(TemplateView):
     template_name = "index.html" 
 
@@ -48,8 +49,23 @@ def GenView(request):
         communityname=request.POST['communityname']
         quantity=request.POST['quantity']
         user=SubmitWaste(contact=contact,fullname=fullname,address=address,zipcode=zipcode,email=email,typeofwaste=typeofwaste,quantityofwaste=quantity,communityName=communityname)
+        print(user)
         user.save()
-        return redirect('main')
+        print(zipcode)
+        string="thank for using our website we have successfuly recodeed your data "
+        send_mail(
+                'waste Mangment your data with us ',
+                string,
+                settings.EMAIL_HOST_USER,
+                [email],
+                fail_silently=False,
+
+            )
+
+        
+        message="form Submitted, We will get in touch to you shortly!!"
+        return render(request,'thankyou.html',{'message':message})
+        
 
         
     return render(request,'SignupG.html')
@@ -147,57 +163,68 @@ class ColView(CreateView):
 class Result(TemplateView):
     template_name='result.html'
 
+
 geolocator = Nominatim(user_agent="myapp")
 def new_view(request):
-    form=forms.CollectWasteForm()
     if request.method=='POST':
-        form=forms.CollectWasteForm(request.POST)
-        if form.is_valid():
-            print("hello")
+        email=request.POST['email']
+        fullname=request.POST['fullname']
+        address=request.POST['address']
+        zipcode=request.POST['zip-code']
+        contact=request.POST['contact']
+        typeofwaste=request.POST['Typeofwaste']
+        communityname=request.POST['communityname']
+        quantity=request.POST['quantity']
+        user=CollectWaste(contact=contact,fullname=fullname,address=address,zipcode=zipcode,email=email,typeofwaste=typeofwaste,quantityofwaste=quantity,communityName=communityname)
+        print(user)
+        user.save()
+        print(address)
+        b=geolocator.geocode(zipcode)
+        lat=b.latitude
+        lon=b.longitude
+        tup1=(lat,lon)
+        print(lat,lon,"hello")
+        #print(a)
+        v=SubmitWaste.objects.filter(typeofwaste=a).values_list()
+        print(v)
+        list1=[]
+        rt=[]
+        for i in v:
+            temp=[]
+            temp.append(i[4])
+            temp.append(i[5])
+            print(i[4])
+            list1.append(geolocator.geocode(i[4],timeout=10))
+            rt.append(temp)
+        dist=[]
+        for ele in list1:
 
-            #send this information to this email value 
-            email=form.cleaned_data['email']
-            dataset=SubmitWaste.objects.filter(email=email).values_list()
-            l=len(dataset)
-            if(l==0):
-
-                message="your data is not registered with us"
-            else:
-
-                print(l)
-            
-                li=[]
-                for i in dataset:
-                    li.append(i[2])
-                    li.append(i[4])
-                    li.append(i[5])
-
-                item=li[0]
-                print(item)
-                item2=li[1]
-                print(item2)
-
-                item3=li[2]
-                print(item3)
-                ptr="we have Recieved your information. our executive will visit you in next working days .please stay connect with us "
-                string=ptr+item2
-            
-
-                send_mail(
-                    'waste Mangment your data with us ',
-                    string,
-                    settings.EMAIL_HOST_USER,
-                    [email],
-                    fail_silently=False,
+            tup2=(ele.latitude,ele.longitude)
+            dist.append(distance.distance(tup1, tup2).km)
+            print(dist)
+            j=0
+            for m in dist:
+                rt[j].append(m)
+        string="thank for using our website we have successfuly recodeed your data "
+        send_mail(
+                'waste Mangment your data with us ',
+                string,
+                settings.EMAIL_HOST_USER,
+                [email],
+                fail_silently=False,
 
             )
+        message="form Submitted, We will get in touch to you shortly!!"
+        return render(request,'thankyou.html',{'message':message})
 
-                message="form Submitted, We will get in touch to you shortly!!"
             #v=SubmitWaste.objects.filter(typeofwaste=a).values_list()
             #print(v)
 
-            return render(request,'thankyou.html',{'message':message})
-    return render(request,'SignupC.html',{'form':form})
+
+        
+
+        
+    return render(request,'SignupC.html')
 
 def send_data(request):
     form=forms.SubmitWasteForm()
