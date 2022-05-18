@@ -46,15 +46,16 @@ def GenView(request):
         zipcode=request.POST['zip-code']
         contact=request.POST['contact']
         typeofwaste=request.POST['Typeofwaste']
+        print(typeofwaste)
         communityname=request.POST['communityname']
         quantity=request.POST['quantity']
         user=SubmitWaste(contact=contact,fullname=fullname,address=address,zipcode=zipcode,email=email,typeofwaste=typeofwaste,quantityofwaste=quantity,communityName=communityname)
         print(user)
         user.save()
         print(zipcode)
-        string="thank for using our website we have successfuly recodeed your data "
+        string="Hi,Greetings from Vyarth !!We thank you for considering Vyarth Bekaar to Sweekar  as your waste remover. We have received your application. If you are interested to work we will connect to you soon, and your wastege will dispose. "
         send_mail(
-                'waste Mangment your data with us ',
+                'vyarth Bekaar to Sweekar',
                 string,
                 settings.EMAIL_HOST_USER,
                 [email],
@@ -64,7 +65,7 @@ def GenView(request):
 
         
         message="form Submitted, We will get in touch to you shortly!!"
-        return render(request,'thankyou.html',{'message':message})
+        return render(request,'works.html')
         
 
         
@@ -167,17 +168,17 @@ class Result(TemplateView):
 geolocator = Nominatim(user_agent="myapp")
 def new_view(request):
     if request.method=='POST':
-        email=request.POST['email']
-        fullname=request.POST['fullname']
+        #email=request.POST['email']
+        #fullname=request.POST['fullname']
         address=request.POST['address']
         zipcode=request.POST['zip-code']
         contact=request.POST['contact']
         typeofwaste=request.POST['Typeofwaste']
         communityname=request.POST['communityname']
-        quantity=request.POST['quantity']
-        user=CollectWaste(contact=contact,fullname=fullname,address=address,zipcode=zipcode,email=email,typeofwaste=typeofwaste,quantityofwaste=quantity,communityName=communityname)
-        print(user)
-        user.save()
+        #quantity=request.POST['quantity']
+        #user=CollectWaste(contact=contact,fullname=fullname,address=address,zipcode=zipcode,email=email,typeofwaste=typeofwaste,quantityofwaste=quantity,communityName=communityname)
+        #print(user)
+        #user.save()
         print(address)
         b=geolocator.geocode(zipcode)
         lat=b.latitude
@@ -185,7 +186,7 @@ def new_view(request):
         tup1=(lat,lon)
         print(lat,lon,"hello")
         #print(a)
-        v=SubmitWaste.objects.filter(typeofwaste=a).values_list()
+        v=SubmitWaste.objects.filter(typeofwaste=typeofwaste).values_list()
         print(v)
         list1=[]
         rt=[]
@@ -193,29 +194,24 @@ def new_view(request):
             temp=[]
             temp.append(i[4])
             temp.append(i[5])
+            temp.append(i[1])
             print(i[4])
-            list1.append(geolocator.geocode(i[4],timeout=10))
+            
             rt.append(temp)
         dist=[]
         for ele in list1:
-
+        
             tup2=(ele.latitude,ele.longitude)
             dist.append(distance.distance(tup1, tup2).km)
             print(dist)
             j=0
             for m in dist:
                 rt[j].append(m)
-        string="thank for using our website we have successfuly recodeed your data "
-        send_mail(
-                'waste Mangment your data with us ',
-                string,
-                settings.EMAIL_HOST_USER,
-                [email],
-                fail_silently=False,
+        
+            
+        
+        return render(request,'result.html',{'val':rt})
 
-            )
-        message="form Submitted, We will get in touch to you shortly!!"
-        return render(request,'thankyou.html',{'message':message})
 
             #v=SubmitWaste.objects.filter(typeofwaste=a).values_list()
             #print(v)

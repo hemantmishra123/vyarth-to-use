@@ -82,21 +82,13 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="login-reg-bg show">
                     <div class="log-reg-area reg">
-					
-                        <h2 class="log-title">Enter Your Waste Details for Recycling. and connect with us </h2>
+                        <h2 class="log-title">Enter Your Waste Details and connect with us </h2>
                         <p>
                             Don’t use Gatherly Yet? <a href="#" title="">Take the tour</a> or <a href="#" title="">Join now</a>
                         </p>
                         <form method="post" action="">
                             {% csrf_token %}
-                            <div class="form-group">
-                                <input type="text" required="required" name="email"/>
-                                <label class="control-label" for="input">Email</label><i class="mtrl-select"></i>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" required="required" name="fullname"/>
-                                <label class="control-label" for="input">Full Name</label><i class="mtrl-select"></i>
-                            </div>
+                            
 							<div class="form-group">
                                 <input type="text" required="required" name="address"/>
                                 <label class="control-label" for="input">address</label><i class="mtrl-select"></i>
@@ -112,18 +104,29 @@
                             </div>
                            
 							<div class="form-group">
-                                <input type="text" required="required" name="Typeofwaste"/>
-                                <label class="control-label" for="input">Type-of-Waste</label><i class="mtrl-select"></i>
+                                
+                         
+				   <select style="height: 31px;
+  width: 151px;" name="Typeofwaste" id="cars">
+                   <option value="metal">metal</option>
+                   <option value="glass">glass</option>
+                  <option value="plastic">plastic</option>
+                  <option value="paper">paper</option>
+				  <option value="organic">organic</option>
+                  </select>
                             </div>
 							<div class="form-group">
-                                <input type="text" required="required" name="communityname"/>
-                                <label class="control-label" for="input">community-Name</label><i class="mtrl-select"></i>
+                                
+                         
+				   <select style="height: 31px;
+  width: 151px;" name="communityname" id="cars">
+                   <option value="household">household</option>
+                   <option value="industry">industry</option>
+                  <option value="market">market</option>
+                  <option value="office">office</option>
+				  
+                  </select>
                             </div>
-							<div class="form-group">
-                                <input type="text" required="required" name="quantity"/>
-                                <label class="control-label" for="input">Quantity-of-Waste</label><i class="mtrl-select"></i>
-                            </div>
-							
 							
                             <div class="form-radio">
                                 <div class="radio">

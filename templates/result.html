@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base2.html" %}
 {% block headblock %}
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -12,7 +12,7 @@
   {% if val %}
      <h3>There are {{ val|length }} records:</h3>
      <br>
-     <td><h3> <b>Location  Amount  Distance </b></h3></td>
+     <td><h3> <b>typeofwaste location contactnumber</b></h3></td>
      <br>
      {% for  e in val  %}
      {% for x in e %}
