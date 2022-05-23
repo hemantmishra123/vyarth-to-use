@@ -63,12 +63,31 @@ def GenView(request):
 
             )
 
-        
-        message="form Submitted, We will get in touch to you shortly!!"
-        return render(request,'works.html')
-        
 
-        
+        message="form Submitted, We will get in touch to you shortly!!"
+        form = forms.SearchForm()
+        address1 = Search.objects.all().last()
+        location = geocoder.osm(zipcode)
+        lat = location.lat
+        lng = location.lng
+        country = location.country
+        if lat == None or lng == None:
+            address1.delete()
+            return HttpResponse('You address input is invalid')
+
+    # Create Map Object
+        m = folium.Map(location=[19, -12], zoom_start=2)
+
+        folium.Marker([lat, lng], tooltip='Click for more',
+                  popup=country).add_to(m)
+    # Get HTML Representation of Map Object
+        m = m._repr_html_()
+        context = {
+            'm': m,
+            'form': form,
+        }
+        return render(request, 'map.html', context)
+
     return render(request,'SignupG.html')
     
 def signu_request(request):
