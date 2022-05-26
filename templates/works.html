@@ -91,12 +91,22 @@
                         <p>For now, our primary motivation is not to make money. And VYARTH.. BEKAAR TO SWEEKAR is intiative to make our environment clean When it comes to waste management it is very important to learn how to gain knowledge about it. As it has a big important impact on our lives and the environment. Waste management is a burning issue in the modern world. The avoidance and reduction of waste is a very important part of waste management.
                         .</p>
 						<p> RAISE ONE STEP TO MAKE OUR WORLD CLEANER.. </p>
+						 <iframe
+      allow="microphone;"
+    width="350"
+    height="430"
+    align="right"
+    src="https://console.dialogflow.com/api-client/demo/embedded/9859ceea-9fb8-4a16-a4e8-891b971daa29">
+    hello</iframe>
 						   
 
                     </div>
                        <form>  
         <div class="container">   
+		
              <ul class="nav navbar-nav " >
+			 
+			 
              {% if request.user.is_active %}
  
 
@@ -107,17 +117,13 @@
       <a href="{% url 'gview' %}"><button type="button" class="btn btn-primary btn-md">Dispose Waste</button></a>
 	  
      <a href="{% url 'new_view' %}"><button type="button" class="btn btn-primary btn-md">Recycle Waste</button></a>
-      <iframe
-    allow="microphone;"
-    width="350"
-    height="430"
-    align="right"
-    src="https://console.dialogflow.com/api-client/demo/embedded/9859ceea-9fb8-4a16-a4e8-891b971daa29">
-    hello</iframe>
+     
 
        {% endif %}
             
             </ul>
+			
+			
         </div>  
 		
     </form>     
