@@ -28,7 +28,9 @@
             </a>
     					<ul class="nav navbar-nav navbar-right">
     						{% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}"><button type="button" class="btn btn-primary btn-lg">LogOut</button></a></li>
+					<li><a href="{% url 'hem' %}"><button type="button" class="btn btn-primary btn-lg">map</button></a></li>			
+                    <li><a href="{% url 'logout' %}"><button type="button" class="btn btn-primary btn-lg">Logout</button></a></li>
+					
                 {% else %}
                       <li><a href="{% url 'login' %}"><button type="button" class="btn btn-primary btn-lg">Login</button></a></li>
                       <li><p></p></li>
