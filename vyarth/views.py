@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from myapp.models import SubmitWaste,CollectWaste, Search
 from . import forms
 from geopy.geocoders import Nominatim
-from geopy import distance
+from geopy.distance import distance
 from operator import itemgetter
 from tabulate import tabulate
 from django.core.mail import send_mail
@@ -16,6 +16,7 @@ from .forms import SearchForm
 import folium
 import geocoder
 from django.conf import settings
+
 
 
 class HomePage(TemplateView):
@@ -66,20 +67,40 @@ def GenView(request):
 
         message="form Submitted, We will get in touch to you shortly!!"
         form = forms.SearchForm()
+        
         address1 = Search.objects.all().last()
         location = geocoder.osm(zipcode)
         lat = location.lat
+        print(lat)
         lng = location.lng
-        country = location.country
-        if lat == None or lng == None:
-            address1.delete()
-            return HttpResponse('You address input is invalid')
-
-    # Create Map Object
+        point1=float(lat),float(lng)
+        print(lng)
+        
+        
+        location2=geocoder.osm(263660)
+        lat1 = location2.lat
+        lng1 = location2.lng
+        lat = location.lat
+        lng = location.lng
+        point2=float(lat1),float(lng1)
+        #km=distance(location,location2)
         m = folium.Map(location=[19, -12], zoom_start=2)
+        folium.CircleMarker([lat, lng], tooltip='Click for more',
+                  popup='country').add_to(m)
+        
+        folium.Marker([lat1, lng1], tooltip='Click for more',
+                  popup='country').add_to(m)
+        
+        folium.PolyLine((point1,point2)).add_to(m)
+        
+        
+        #client intiliazation on the  screen for dataset.
+       
+       
+        
 
-        folium.Marker([lat, lng], tooltip='Click for more',
-                  popup=country).add_to(m)
+       
+       
     # Get HTML Representation of Map Object
         m = m._repr_html_()
         context = {
@@ -180,8 +201,25 @@ class ColView(CreateView):
     #success_url
     #template_name='thankyou.html'
 
+class Sustain(TemplateView):
+    template_name='sustain.html'
+    
 class Result(TemplateView):
     template_name='result.html'
+
+class Waste(TemplateView):
+    template_name='waste.html'
+    
+class Recycle(TemplateView):
+    template_name='recycle.html'
+class Organic(TemplateView):
+    template_name='organic.html'
+
+class Reduce(TemplateView):
+    template_name='reduce.html'
+
+
+
 
 
 geolocator = Nominatim(user_agent="myapp")
@@ -209,12 +247,13 @@ def new_view(request):
         print(v)
         list1=[]
         rt=[]
+        map=[]
         for i in v:
             temp=[]
             temp.append(i[4])
             temp.append(i[5])
             temp.append(i[1])
-            print(i[4])
+            map.append(i[7])
             
             rt.append(temp)
         dist=[]
@@ -241,6 +280,54 @@ def new_view(request):
         
     return render(request,'SignupC.html')
 
+    
+def mapurl(request):
+    if request.method=='POST':
+        #email=request.POST['email']
+        #fullname=request.POST['fullname']
+        address=request.POST['address']
+        zipcode=request.POST['zip-code']
+        contact=request.POST['contact']
+        typeofwaste=request.POST['Typeofwaste']
+        communityname=request.POST['communityname']
+        print(address)
+        b=geolocator.geocode(zipcode)
+        lat=b.latitude
+        lon=b.longitude
+        tup1=(lat,lon)
+        print(lat,lon,"hello")
+        v=SubmitWaste.objects.filter(typeofwaste=typeofwaste).values_list()
+        form = forms.SearchForm()
+        map=[]
+        for i in v:
+            map.append(i[7])
+        
+        m = folium.Map(location=[19, -12], zoom_start=2)
+        
+        for i in range(len(map)):
+            if(map[i]!=None):
+                point=geolocator.geocode(map[i])
+                x=point.latitude
+                y=point.longitude
+                folium.Marker([x, y], tooltip='Click for more',
+                  popup='country').add_to(m)
+        
+        
+        m = m._repr_html_()
+        context = {
+            'm': m,
+            'form': form,
+        }
+        return render(request, 'map.html', context)
+    
+                
+            
+    return render(request,'SignupC.html')        
+            
+            
+            
+            
+        
 def send_data(request):
     form=forms.SubmitWasteForm()
     if request.method=='POST':

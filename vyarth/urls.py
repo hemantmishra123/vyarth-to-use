@@ -20,6 +20,7 @@ from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r"^$", views.HomePage.as_view(), name="home"),
@@ -34,6 +35,12 @@ urlpatterns = [
     url(r"^send_data/$", views.send_data, name="send_data"),
     url(r"^register/$", views.signup_request, name='signup'),
     url(r"^map/$", views.signu_request, name='map'),
+    url(r"^url/$", views.mapurl, name='map'),
+    url(r"^sustain/$", views.Sustain.as_view(), name='sustain'),
+    url(r"^waste/$", views.Waste.as_view(), name='waste'),
+    url(r"^recycle/$", views.Recycle.as_view(), name='recycle'),
+    url(r"^organic/$", views.Organic.as_view(), name='organic'),
+    url(r"^reduce/$", views.Reduce.as_view(), name='reduce'),
 
 ]
 if settings.DEBUG:
