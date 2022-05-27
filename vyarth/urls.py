@@ -41,6 +41,7 @@ urlpatterns = [
     url(r"^recycle/$", views.Recycle.as_view(), name='recycle'),
     url(r"^organic/$", views.Organic.as_view(), name='organic'),
     url(r"^reduce/$", views.Reduce.as_view(), name='reduce'),
+    url(r"^plastic/$", views.Plastic.as_view(), name='plastic'),
 
 ]
 if settings.DEBUG:

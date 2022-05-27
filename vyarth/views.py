@@ -218,6 +218,10 @@ class Organic(TemplateView):
 class Reduce(TemplateView):
     template_name='reduce.html'
 
+class Plastic(TemplateView):
+    template_name='plastic.html'
+
+
 
 
 
