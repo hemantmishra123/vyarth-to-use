@@ -77,7 +77,7 @@ def GenView(request):
         print(lng)
         
         
-        location2=geocoder.osm(263660)
+        location2=geocoder.osm(110056)
         lat1 = location2.lat
         lng1 = location2.lng
         lat = location.lat
@@ -85,10 +85,10 @@ def GenView(request):
         point2=float(lat1),float(lng1)
         #km=distance(location,location2)
         m = folium.Map(location=[19, -12], zoom_start=2)
-        folium.CircleMarker([lat, lng], tooltip='Click for more',
+        folium.Marker([lat, lng], tooltip='Click for more',
                   popup='country').add_to(m)
         
-        folium.Marker([lat1, lng1], tooltip='Click for more',
+        folium.CircleMarker([lat1, lng1], tooltip='Click for more',
                   popup='country').add_to(m)
         
         folium.PolyLine((point1,point2)).add_to(m)
@@ -220,6 +220,9 @@ class Reduce(TemplateView):
 
 class Plastic(TemplateView):
     template_name='plastic.html'
+
+class Terms(TemplateView):
+    template_name='terms.html'
 
 
 
