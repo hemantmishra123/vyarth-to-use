@@ -69,6 +69,8 @@ def GenView(request):
         form = forms.SearchForm()
         
         address1 = Search.objects.all().last()
+        pointer=   Search.objects.all()
+        print(pointer)
         location = geocoder.osm(zipcode)
         lat = location.lat
         print(lat)
